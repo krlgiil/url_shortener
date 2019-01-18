@@ -1,4 +1,5 @@
 import Sequelize from 'sequelize';
+import SyncUrlModel from './model/Url';
 
 function createConnection() {
   const sequelize = new Sequelize(
@@ -29,5 +30,7 @@ function createConnection() {
   return sequelize;
 }
 const Connection = createConnection();
+const Url = SyncUrlModel(Connection);
 
+export { Url };
 export default Connection;

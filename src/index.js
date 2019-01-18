@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 dotenv.config();
 import Connection from './database/connection';
+import UrlRepository from './database/repository/UrlRepository';
 
 const app = express();
 
@@ -20,11 +21,19 @@ app.get('/', (req, res) => {
 
 app.post('/submit', (req, res) => {
   const { url } = req.body;
+  let msg = '';
   if (url) {
-    /** @todo insert url in db */
+    const repository = new UrlRepository();
+    repository.insertUrl(url).then(result => {
+      if (result) {
+        const { shortId } = result;
+        msg = `URL inseree avec succes "${shortId}"`;
+        res.render('homepage', { msg });
+      }
+    });
+  } else {
+    res.render('homepage');
   }
-
-  res.render('homepage');
 });
 
 app.listen(3000, () => {
