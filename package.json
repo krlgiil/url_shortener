@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "babel src -d lib",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --require dotenv/config lib/index.js"
+    "lint": "eslint src/",
+    "lint-test": "eslint tests/",
+    "test": "npm run mocha -- npx mocha --opts ./tests/mocha.opts",
+    "start": "nodemon --require dotenv/config lib/index.js",
+    "mocha": "npm run lint && cross-env NODE_ENV=test"
   },
   "author": "Karl Lof",
   "license": "ISC",
@@ -23,6 +26,11 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
-    "nodemon": "^1.18.9"
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.9",
+    "sinon": "^7.2.3"
   }
 }
