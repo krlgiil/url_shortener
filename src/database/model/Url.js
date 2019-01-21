@@ -12,7 +12,7 @@ export default function SyncUrlModel(sequelize) {
       allowNull: false,
       validate: {
         isUrl: true,
-      }
+      },
     },
     shortId: {
       type: Sequelize.STRING,
@@ -23,12 +23,12 @@ export default function SyncUrlModel(sequelize) {
     },
     expiresAt: {
       type: Sequelize.DATE,
-    }
+    },
   }, {
     underscored: true,
   });
-  
+
   Url.sync();
 
   return Url;
-};
+}

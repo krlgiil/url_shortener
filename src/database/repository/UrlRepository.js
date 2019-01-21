@@ -1,18 +1,22 @@
 import moment from 'moment';
-import Connection, { Url } from '../connection';
+import { Url } from '../connection';
 import converter from '../../utils/Converter';
 
 class UrlRepository {
+  constructor() {
+    this.client = Url;
+  }
+
   findUrl(shortId) {
-    return Url.findOne({
+    return this.client.findOne({
       where: {
-        shortId
-      }
+        shortId,
+      },
     });
   }
 
   insertUrl(url) {
-    return Url.create({
+    return this.client.create({
       url,
       shortId: converter.generateHash(url),
       expiresAt: moment().add(process.env.EXPIRATION_DAY || 1, 'days'),

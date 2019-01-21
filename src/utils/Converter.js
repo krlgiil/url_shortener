@@ -1,30 +1,33 @@
 class Converter {
-  ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split('');
+  constructor() {
+    this.ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+    this.base = this.ALPHABET.length;
+  }
 
   static generateHash(id) {
     return Converter.encode(id);
   }
 
   static encode(i) {
-    if (i == 0) {
-      return ALPHABET[0];
+    if (parseInt(i, 10) === 0) {
+      return this.ALPHABET[0];
     }
 
-    s = '';
-    base = ALPHABET.length;
-    while (i > 0) {
-      s += ALPHABET[i % base];
-      i = i / base;
+    let s = '';
+    let j = i;
+    while (j > 0) {
+      s += this.ALPHABET[j % this.base];
+      j /= this.base;
     }
 
     return s.reverse().join('');
   }
 
   static decode(s) {
-      let i = 0;
-      const source = s.map(c => (i * base) + ALPHABET.IndexOf(c));
+    const i = 0;
+    const source = s.map(c => (i * this.base) + this.ALPHABET.IndexOf(c));
 
-      return source.join('');
+    return source.join('');
   }
 }
 

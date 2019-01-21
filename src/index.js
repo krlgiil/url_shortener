@@ -1,9 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-dotenv.config();
-import Connection from './database/connection';
 import UrlRepository from './database/repository/UrlRepository';
+
+dotenv.config();
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.set('view engine', 'pug');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: true,
 }));
 
 app.get('/', (req, res) => {
@@ -24,7 +24,7 @@ app.post('/submit', (req, res) => {
   let msg = '';
   if (url) {
     const repository = new UrlRepository();
-    repository.insertUrl(url).then(result => {
+    repository.insertUrl(url).then((result) => {
       if (result) {
         const { shortId } = result;
         msg = `URL inseree avec succes "${shortId}"`;
