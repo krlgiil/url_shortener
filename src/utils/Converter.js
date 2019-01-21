@@ -1,33 +1,36 @@
 class Converter {
   constructor() {
-    this.ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
-    this.base = this.ALPHABET.length;
+    this.alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
+    this.base = this.alphabet.length;
   }
 
-  static generateHash(id) {
-    return Converter.encode(id);
+  generateHash(id) {
+    return this.encode(id);
   }
 
-  static encode(i) {
-    if (parseInt(i, 10) === 0) {
-      return this.ALPHABET[0];
+  encode(id) {
+    if (parseInt(id, 10) === 0) {
+      return this.alphabet[0];
     }
 
-    let s = '';
-    let j = i;
-    while (j > 0) {
-      s += this.ALPHABET[j % this.base];
-      j /= this.base;
+    const res = [];
+    let i = id;
+    while (i > 0) {
+      res.push(`${this.alphabet[i % this.base]}`);
+      i = Math.floor(i / this.base);
     }
 
-    return s.reverse().join('');
+    return res.reverse().join('');
   }
 
-  static decode(s) {
-    const i = 0;
-    const source = s.map(c => (i * this.base) + this.ALPHABET.IndexOf(c));
+  decode(shortId) {
+    let i = 0;
+    const tab = shortId.split('');
+    for (let ind = 0; ind < tab.length; ind += 1) {
+      i = (i * this.base) + this.alphabet.indexOf(tab[ind]);
+    }
 
-    return source.join('');
+    return i;
   }
 }
 

@@ -7,9 +7,8 @@
     "build": "babel src -d lib",
     "lint": "eslint src/",
     "lint-test": "eslint tests/",
-    "test": "npm run mocha -- npx mocha --opts ./tests/mocha.opts",
-    "start": "nodemon --require dotenv/config lib/index.js",
-    "mocha": "npm run lint && cross-env NODE_ENV=test"
+    "test": "npm run lint && cross-env NODE_ENV=test && mocha --opts ./tests/mocha.opts --recursive tests",
+    "start": "nodemon --require dotenv/config lib/index.js"
   },
   "author": "Karl Lof",
   "license": "ISC",
@@ -25,14 +24,17 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.2.3",
     "@babel/register": "^7.0.0",
+    "chai": "^4.2.0",
     "eslint": "^5.12.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
     "gulp-babel": "^8.0.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.9",
-    "sinon": "^7.2.3"
+    "sinon": "^7.2.3",
+    "sinon-chai": "^3.3.0"
   }
 }
