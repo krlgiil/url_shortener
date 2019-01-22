@@ -20,7 +20,19 @@ app.get('/', (req, res) => {
   res.render('homepage');
 });
 
-app.post('/submit', (req, res) => {
+app.get('/:shortId', (req, res) => {
+  const { shortId } = req.params;
+  if (shortId) {
+    const repository = new UrlRepository();
+    repository.findUrl(shortId).then((result) => {
+      res.redirect(result.url);
+    });
+  } else {
+    res.render('homepage');
+  }
+});
+
+app.post('/', (req, res) => {
   const { url } = req.body;
   let msg = '';
   if (url) {
@@ -29,7 +41,8 @@ app.post('/submit', (req, res) => {
       if (result) {
         const converter = new Converter();
         const shortId = converter.encode(result.id);
-        msg = `URL inseree avec succes "${shortId}"`;
+        const url = `${req.protocol}://${req.get('Host')}/${shortId}`;
+        msg = `URL inseree avec succes <strong><a href="${url}" target="_blank">${url}</a></strong>`;
         res.render('homepage', { msg });
       }
     });

@@ -7,10 +7,10 @@ html
     br
     .main.container
       .row
-        form(method='POST' action='/submit')
+        form(method='POST' action='/')
           div.form-group
             label(for='url') URL:
             input#name.form-control(type='text', placeholder='submit your url' name='url')
           if msg
-            div.alert.alert-success(role="alert")= msg
+            div.alert.alert-success(role="alert")!= msg
           button.btn.btn-primary(type='submit') Submit
