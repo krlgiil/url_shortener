@@ -8,7 +8,8 @@
     "lint": "eslint src/",
     "lint-test": "eslint tests/",
     "test": "npm run lint && cross-env NODE_ENV=test && mocha --opts ./tests/mocha.opts --recursive tests",
-    "start": "nodemon --require dotenv/config lib/index.js"
+    "start": "nodemon --require dotenv/config lib/index.js",
+    "start-dev": "npm run build && npm run start"
   },
   "author": "Karl Lof",
   "license": "ISC",

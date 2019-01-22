@@ -14,10 +14,6 @@ export default function SyncUrlModel(sequelize) {
         isUrl: true,
       },
     },
-    shortId: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
     createdAt: {
       type: Sequelize.DATE,
     },

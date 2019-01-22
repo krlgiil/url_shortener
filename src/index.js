@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import UrlRepository from './database/repository/UrlRepository';
+import Converter from './utils/Converter';
 
 dotenv.config();
 
@@ -26,7 +27,8 @@ app.post('/submit', (req, res) => {
     const repository = new UrlRepository();
     repository.insertUrl(url).then((result) => {
       if (result) {
-        const { shortId } = result;
+        const converter = new Converter();
+        const shortId = converter.encode(result.id);
         msg = `URL inseree avec succes "${shortId}"`;
         res.render('homepage', { msg });
       }
