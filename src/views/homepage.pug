@@ -1,0 +1,16 @@
+html
+  head
+    title Welcome to the hompage
+    link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css", integrity="sha384-PmY9l28YgO4JwMKbTvgaS7XNZJ30MK9FAZjjzXtlqyZCqBY6X6bXIkM++IkyinN+", crossorigin="anonymous")
+  body
+    h1 Welcome to my URL shortener
+    br
+    .main.container
+      .row
+        form(method='POST' action='/')
+          div.form-group
+            label(for='url') URL:
+            input#name.form-control(type='text', placeholder='submit your url' name='url')
+          if msg
+            div.alert.alert-success(role="alert")!= msg
+          button.btn.btn-primary(type='submit') Submit
